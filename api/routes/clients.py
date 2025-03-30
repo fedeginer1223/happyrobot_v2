@@ -87,7 +87,8 @@ def update_client_info():
         )
 
         # Set value of a hash
-        r.hset(f'client:{params.get("phone_number")}', 'recall_communicated', 'yes')
+        r.hset(f'client:{params.get("phone_number")}', 'recall_communicated', f'{params.get("recall_communicated")}')
+        r.hset(f'client:{params.get("phone_number")}', 'notes', f'{params.get("notes")}')
         return jsonify({"Client info updated"})
 
     except Exception as e:
