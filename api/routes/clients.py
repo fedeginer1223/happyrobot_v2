@@ -44,8 +44,6 @@ def get_client_info():
         password="krewkgFxukPnveGxrFQNscISVC1uNFXg",
         )
 
-        print(f"number {params.get('phone_number')}")
-
         # Set variables
         phone_number  = params.get("phone_number").replace(" ","")
 
@@ -94,9 +92,11 @@ def update_client_info():
         notes = params.get("notes")
 
         # Set value of a hash
+        print(f'client:{phone_number}')
         r.hset(f'client:{phone_number}', 'recall_communicated', f'{communication}')
         r.hset(f'client:{phone_number}', 'notes', f'{notes}')
-        return jsonify({"Client info updated"})
+        cliente = r.hgetall(f'client:{phone_number}')
+        return jsonify(cliente)
 
     except Exception as e:
-        abort(404, description=f'The referenced value has not been found')
+        abort(404, description=f'The phone number has not been found')

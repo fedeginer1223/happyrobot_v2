@@ -26,7 +26,7 @@ def validate_params(parameters: dict):
 
             if not type(value) == str:
                 raise ValueError('Invalid phone_number format. Not a string')
-            if len(value) != 12:
+            if (len(value) != 12)&(value!="web"):
                 print(value)
                 raise ValueError('Invalid phone_number format. Length must be 1, remember to include +(country)')
         
