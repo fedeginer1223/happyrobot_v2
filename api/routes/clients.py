@@ -48,7 +48,8 @@ def get_client_info():
         print(f'client:+{params.get("phone_number")}')
 
         # Get client
-        cliente = r.hgetall(f'client:+{params.get("phone_number").replace(" ","")}')
+        print(f'client:{params.get("phone_number").replace(" ","")}')
+        cliente = r.hgetall(f'client:{params.get("phone_number").replace(" ","")}')
         return jsonify(cliente)
 
     except Exception as e:
