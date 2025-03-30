@@ -44,16 +44,19 @@ def get_client_info():
         password="krewkgFxukPnveGxrFQNscISVC1uNFXg",
         )
 
+        print(f"number {params.get('phone_number')}")
+        print(f'client:+{params.get("phone_number")}')
+
         # Get client
-        cliente = r.hgetall(f'client:{params.get("phone_number")}')
+        cliente = r.hgetall(f'client:+{params.get("phone_number").replace(" ","")}')
         return jsonify(cliente)
 
     except Exception as e:
         abort(404, description=f'The referenced value has not been found')
 
 # getting carrier information
-@clients_bp.update_client_info('/update_info', methods=['GET'])
-def get_carrier_info():
+@clients_bp.route('/update_info', methods=['GET'])
+def update_client_info():
     """
     Returns carrier information
     """

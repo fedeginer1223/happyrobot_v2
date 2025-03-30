@@ -26,8 +26,8 @@ def validate_params(parameters: dict):
 
             if not type(value) == str:
                 raise ValueError('Invalid phone_number format. Not a string')
-            if len(value) != 12:
-                raise ValueError('Invalid phone_number format. Length must be 12, remember to include +(country)')
+            if len(value) != 11:
+                raise ValueError('Invalid phone_number format. Length must be 1, remember to include (country) without the +')
         
         if param == 'token':
 

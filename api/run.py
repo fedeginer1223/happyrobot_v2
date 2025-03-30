@@ -1,6 +1,6 @@
 from flask import Flask
 from loguru import logger
-from .routes.get_client_info import clients_bp
+from .routes.clients import clients_bp
 
 
 # Crear la app de Flask
