@@ -1,4 +1,4 @@
-from .bigquery import check_api_token_gcs_secret
+from .gcp import check_api_token_gcs_secret
 
 def validate_params(parameters: dict):
     """
@@ -12,8 +12,8 @@ def validate_params(parameters: dict):
     """
 
     # If it should include the reference_number parameter
-    if "reference_number" not in parameters.keys():
-        raise ValueError('Reference number is required.')
+    if "phone_number" not in parameters.keys():
+        raise ValueError('Phone number is required.')
     
     # If it should include the token parameter
     if 'token' not in parameters.keys():
@@ -22,12 +22,12 @@ def validate_params(parameters: dict):
     # Check token
     for param, value in parameters.items():
 
-        if param == 'reference_number':
+        if param == 'phone_number':
 
             if not type(value) == str:
-                raise ValueError('Invalid reference_number format. Not a string')
-            elif len(value) == 0:
-                raise ValueError('Invalid reference_number format. Length 0')
+                raise ValueError('Invalid phone_number format. Not a string')
+            if len(value) != 12:
+                raise ValueError('Invalid phone_number format. Length must be 12, remember to include +(country)')
         
         if param == 'token':
 
