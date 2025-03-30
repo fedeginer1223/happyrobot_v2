@@ -45,11 +45,13 @@ def get_client_info():
         )
 
         print(f"number {params.get('phone_number')}")
-        print(f'client:+{params.get("phone_number")}')
+
+        # Set variables
+        phone_number  = params.get("phone_number").replace(" ","")
 
         # Get client
-        print(f'client:{params.get("phone_number").replace(" ","")}')
-        cliente = r.hgetall(f'client:{params.get("phone_number").replace(" ","")}')
+        print(f'client:{phone_number}')
+        cliente = r.hgetall(f'client:{phone_number}')
         return jsonify(cliente)
 
     except Exception as e:
@@ -86,9 +88,14 @@ def update_client_info():
         password="krewkgFxukPnveGxrFQNscISVC1uNFXg",
         )
 
+        # Set variables
+        phone_number  = params.get("phone_number").replace(" ","")
+        communication = params.get("recall_communicated")
+        notes = params.get("notes")
+
         # Set value of a hash
-        r.hset(f'client:{params.get("phone_number")}', 'recall_communicated', f'{params.get("recall_communicated")}')
-        r.hset(f'client:{params.get("phone_number")}', 'notes', f'{params.get("notes")}')
+        r.hset(f'client:{phone_number}', 'recall_communicated', f'{communication}')
+        r.hset(f'client:{phone_number}', 'notes', f'{notes}')
         return jsonify({"Client info updated"})
 
     except Exception as e:
